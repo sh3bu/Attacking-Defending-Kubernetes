@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-cp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-cp
+  template:
+    metadata:
+      labels:
+        app: nginx-cp
+    spec:
+      containers:
+      - name: static-web-cp
+        image: nginx
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-cp
+spec:
+  selector:
+    app: nginx-cp
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+

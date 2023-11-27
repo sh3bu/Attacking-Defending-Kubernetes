@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kube-hunter
+spec:
+  template:
+    metadata:
+      labels:
+        app: kube-hunter
+        job-name: kube-hunter
+    spec:
+      containers:
+      - name: kube-hunter
+        image: aquasec/kube-hunter:0.6.8
+        command:
+        - kube-hunter
+        args:
+        - --pod
+        - --num-worker-threads
+        - "100"
+      restartPolicy: Never

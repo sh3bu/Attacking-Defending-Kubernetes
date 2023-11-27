@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulapp-deployment-full
+  namespace: vulapp-namespace-full
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vulapp-full
+  template:
+    metadata:
+      labels:
+        app: vulapp-full
+    spec:
+      serviceAccountName: vulapp-sa-full
+      containers:
+      - name: vulapp-container-full
+        image: justmorpheu5/insecure-python-app
+        ports:
+        - containerPort: 8000
+

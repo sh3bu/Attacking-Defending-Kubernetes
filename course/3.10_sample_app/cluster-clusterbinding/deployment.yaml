@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulapp-deployment-cl
+  namespace: vulapp-namespace-cl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vulapp-cl
+  template:
+    metadata:
+      labels:
+        app: vulapp-cl
+    spec:
+      serviceAccountName: vulapp-sa-cl
+      containers:
+      - name: vulapp-container-cl
+        image: justmorpheu5/insecure-python-app
+        ports:
+        - containerPort: 8000
+

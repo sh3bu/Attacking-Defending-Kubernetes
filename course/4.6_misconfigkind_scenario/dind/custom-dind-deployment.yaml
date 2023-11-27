@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-dind-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-dind
+  template:
+    metadata:
+      labels:
+        app: custom-dind
+    spec:
+      containers:
+      - name: custom-dind-container
+        image: docker:20.10-dind
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: custom-docker-socket
+          mountPath: /custom/docker/docker.sock
+      volumes:
+      - name: custom-docker-socket
+        hostPath:
+          path: /var/run/docker.sock
