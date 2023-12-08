@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vulapp-clusterrolebinding-full
+subjects:
+- kind: ServiceAccount
+  name: vulapp-sa-full
+  namespace: vulapp-namespace-full
+roleRef:
+  kind: ClusterRole
+  name: vulapp-clusterrole-full
+  apiGroup: rbac.authorization.k8s.io
+
